@@ -2,8 +2,10 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BKV Graphics - Premium POS System</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>BKV_Graphics - Premium POS System</title>
+    <!-- Premium FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
             --bg-primary: #0f172a;
@@ -43,6 +45,7 @@
             padding: 20px;
             position: fixed;
             height: 100vh;
+            z-index: 100;
         }
 
         .main-title {
@@ -79,6 +82,12 @@
             gap: 12px;
         }
 
+        .nav-btn i {
+            font-size: 18px;
+            width: 20px;
+            text-align: center;
+        }
+
         .nav-btn:hover {
             background-color: var(--bg-tertiary);
             color: var(--text-main);
@@ -105,6 +114,12 @@
 
         .tab-content.active {
             display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(5px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         h2 {
@@ -117,11 +132,27 @@
             color: var(--text-main);
         }
 
+        h2 i {
+            color: var(--accent);
+        }
+
+        h3 {
+            font-size: 16px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        h3 i {
+            color: var(--text-muted);
+        }
+
         /* Grid Framework & Cards */
         .grid-2 {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 25px;
+            gap: 20px;
         }
 
         .grid-3 {
@@ -134,21 +165,21 @@
             background-color: var(--bg-secondary);
             border: 1px solid var(--bg-tertiary);
             border-radius: 12px;
-            padding: 25px;
+            padding: 20px;
             margin-bottom: 25px;
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
         }
 
         /* Forms & Inputs */
         .form-group {
-            margin-bottom: 18px;
+            margin-bottom: 15px;
         }
 
         label {
             display: block;
-            font-size: 13px;
+            font-size: 12px;
             font-weight: 600;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
             color: var(--text-muted);
             text-transform: uppercase;
             letter-spacing: 0.5px;
@@ -156,7 +187,7 @@
 
         input, select, textarea {
             width: 100%;
-            padding: 11px 14px;
+            padding: 12px 14px;
             background-color: var(--bg-primary);
             border: 1px solid var(--bg-tertiary);
             border-radius: 8px;
@@ -174,7 +205,7 @@
             background-color: var(--accent);
             color: var(--text-main);
             border: none;
-            padding: 12px 20px;
+            padding: 12px 18px;
             font-size: 14px;
             font-weight: 600;
             border-radius: 8px;
@@ -182,11 +213,14 @@
             transition: all 0.2s;
             display: inline-flex;
             align-items: center;
+            justify-content: center;
             gap: 8px;
+            width: fit-content;
         }
 
         .btn:hover {
             background-color: var(--accent-hover);
+            transform: translateY(-1px);
         }
 
         .btn-success { background-color: var(--success); }
@@ -195,14 +229,15 @@
         .btn-danger:hover { background-color: #dc2626; }
         .btn-secondary { background-color: var(--bg-tertiary); }
         .btn-secondary:hover { background-color: #475569; }
+        .btn-block { width: 100%; }
 
         /* Quick Items Selection Grid */
         .quick-items-container {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
-            gap: 12px;
+            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            gap: 10px;
             margin-top: 10px;
-            max-height: 200px;
+            max-height: 180px;
             overflow-y: auto;
             padding: 5px;
         }
@@ -210,7 +245,7 @@
         .quick-item-box {
             background-color: var(--bg-primary);
             border: 1px solid var(--bg-tertiary);
-            padding: 12px;
+            padding: 10px;
             border-radius: 8px;
             text-align: center;
             cursor: pointer;
@@ -224,7 +259,7 @@
         }
 
         .quick-item-name {
-            font-size: 13px;
+            font-size: 12px;
             font-weight: 600;
             display: block;
             white-space: nowrap;
@@ -240,14 +275,21 @@
         }
 
         /* Tables styling */
+        .table-responsive {
+            width: 100%;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+        
         table {
             width: 100%;
             border-collapse: collapse;
-            margin-top: 15px;
+            margin-top: 10px;
+            min-width: 500px;
         }
 
         th, td {
-            padding: 12px 16px;
+            padding: 12px 14px;
             text-align: left;
             border-bottom: 1px solid var(--bg-tertiary);
             font-size: 14px;
@@ -258,15 +300,8 @@
             color: var(--text-muted);
             font-weight: 600;
             text-transform: uppercase;
-            font-size: 12px;
+            font-size: 11px;
             letter-spacing: 0.5px;
-        }
-
-        /* History Status Toggle */
-        .status-checkbox {
-            width: auto;
-            margin-right: 8px;
-            cursor: pointer;
         }
 
         /* Dashboard Stats Boxes */
@@ -279,7 +314,7 @@
         }
 
         .stat-val {
-            font-size: 26px;
+            font-size: 24px;
             font-weight: 700;
             margin-top: 8px;
         }
@@ -288,41 +323,35 @@
         .stat-val.expense { color: var(--danger); }
         .stat-val.balance { color: var(--gold); }
 
-        /* Document Preview Block (Hidden in main view, optimized via @media print) */
-        #print-preview-container {
-            display: none;
+        /* Print Elements */
+        #print-preview-container { display: none; }
+
+        /* =========================================
+           MOBILE RESPONSIVENESS
+           ========================================= */
+        @media (max-width: 768px) {
+            body { flex-direction: column; }
+            .sidebar { width: 100%; height: auto; position: relative; border-right: none; border-bottom: 1px solid var(--bg-tertiary); padding: 15px; }
+            .main-title { font-size: 20px; margin-bottom: 15px; padding-bottom: 10px; }
+            .nav-tabs { flex-direction: row; overflow-x: auto; white-space: nowrap; padding-bottom: 5px; -ms-overflow-style: none; scrollbar-width: none; }
+            .nav-tabs::-webkit-scrollbar { display: none; }
+            .nav-btn { padding: 10px 14px; font-size: 13px; flex: 0 0 auto; }
+            .content { margin-left: 0; width: 100%; padding: 15px; }
+            .grid-2, .grid-3 { grid-template-columns: 1fr; gap: 15px; }
+            .card { padding: 15px; margin-bottom: 15px; }
+            h2 { font-size: 18px; margin-bottom: 15px; }
+            h3 { font-size: 14px; }
+            .stat-val { font-size: 20px; }
+            .btn { width: 100%; margin-bottom: 8px; }
+            th, td { padding: 10px; font-size: 12px; }
         }
 
         /* Printing Layout System */
         @media print {
-            body {
-                background: white !important;
-                color: black !important;
-            }
-            .sidebar, .content, button, .btn, .form-group, .quick-items-title, .quick-items-container, .no-print {
-                display: none !important;
-            }
-            #print-preview-container {
-                display: block !important;
-                width: 100%;
-                padding: 20px;
-                color: black !important;
-                background: white !important;
-            }
-            .print-invoice-box {
-                border: none !important;
-                color: black !important;
-                background: white !important;
-            }
-            .print-table th {
-                background-color: #f1f5f9 !important;
-                color: black !important;
-                border-bottom: 2px solid #cbd5e1 !important;
-            }
-            .print-table td {
-                border-bottom: 1px solid #e2e8f0 !important;
-                color: black !important;
-            }
+            body { background: white !important; color: black !important; }
+            .sidebar, .content, button, .btn, .form-group, .quick-items-title, .quick-items-container, .no-print { display: none !important; }
+            #print-preview-container { display: block !important; width: 100%; padding: 0; color: black !important; background: white !important; }
+            @page { margin: 10mm; }
         }
     </style>
 </head>
@@ -330,14 +359,14 @@
 
     <!-- Sidebar Navigation -->
     <div class="sidebar">
-        <div class="main-title">BKV GRAPHICS</div>
+        <div class="main-title">BKV_GRAPHICS</div>
         <div class="nav-tabs">
-            <button class="nav-btn active" onclick="switchTab('dashboard')">💎 Dashboard</button>
-            <button class="nav-btn" onclick="switchTab('invoice-tab')">🧾 Invoice Maker</button>
-            <button class="nav-btn" onclick="switchTab('quotation-tab')">✨ Quotation Maker</button>
-            <button class="nav-btn" onclick="switchTab('pricelist-tab')">💼 Price List</button>
-            <button class="nav-btn" onclick="switchTab('history-tab')">📅 Saved History</button>
-            <button class="nav-btn" onclick="switchTab('expenses-tab')">💸 Expense Log</button>
+            <button class="nav-btn active" onclick="switchTab('dashboard')"><i class="fa-solid fa-chart-pie"></i> Dashboard</button>
+            <button class="nav-btn" onclick="switchTab('invoice-tab')"><i class="fa-solid fa-file-invoice-dollar"></i> Invoice</button>
+            <button class="nav-btn" onclick="switchTab('quotation-tab')"><i class="fa-solid fa-file-contract"></i> Quotation</button>
+            <button class="nav-btn" onclick="switchTab('pricelist-tab')"><i class="fa-solid fa-tags"></i> Catalog</button>
+            <button class="nav-btn" onclick="switchTab('history-tab')"><i class="fa-solid fa-clock-rotate-left"></i> History</button>
+            <button class="nav-btn" onclick="switchTab('expenses-tab')"><i class="fa-solid fa-wallet"></i> Expenses</button>
         </div>
     </div>
 
@@ -346,10 +375,10 @@
 
         <!-- DASHBOARD TAB -->
         <div id="dashboard" class="tab-content active">
-            <h2>💎 Performance Dashboard</h2>
+            <h2><i class="fa-solid fa-chart-pie"></i> Performance Dashboard</h2>
             <div class="grid-3 card">
                 <div class="stat-card">
-                    <label>Total Revenue Received</label>
+                    <label>Total Revenue</label>
                     <div class="stat-val income" id="dash-income">Rs. 0.00</div>
                 </div>
                 <div class="stat-card">
@@ -357,33 +386,33 @@
                     <div class="stat-val expense" id="dash-expense">Rs. 0.00</div>
                 </div>
                 <div class="stat-card">
-                    <label>Net Profit Margin</label>
+                    <label>Net Profit</label>
                     <div class="stat-val balance" id="dash-profit">Rs. 0.00</div>
                 </div>
             </div>
             
             <div class="card">
-                <h3>📊 Monthly Revenue Breakdown</h3>
+                <h3><i class="fa-solid fa-chart-bar"></i> Monthly Revenue Breakdown</h3>
                 <div style="margin-top: 20px; height: 12px; background: var(--bg-primary); border-radius: 6px; overflow: hidden; display: flex;">
                     <div id="bar-income-perc" style="background: var(--success); width: 0%;"></div>
                     <div id="bar-expense-perc" style="background: var(--danger); width: 0%;"></div>
                 </div>
-                <div style="display: flex; justify-content: space-between; margin-top: 10px; font-size: 13px; color: var(--text-muted);">
-                    <span>🟢 Earned Income</span>
-                    <span>🔴 Business Expenditures</span>
+                <div style="display: flex; justify-content: space-between; margin-top: 10px; font-size: 12px; color: var(--text-muted); font-weight: 600;">
+                    <span><i class="fa-solid fa-circle" style="color:var(--success); font-size:10px;"></i> Earned Income</span>
+                    <span><i class="fa-solid fa-circle" style="color:var(--danger); font-size:10px;"></i> Business Expenditures</span>
                 </div>
             </div>
         </div>
 
         <!-- INVOICE TAB -->
         <div id="invoice-tab" class="tab-content">
-            <h2>🧾 Premium Invoice Creator</h2>
+            <h2><i class="fa-solid fa-file-invoice-dollar"></i> Premium Invoice Creator</h2>
             <div class="grid-2">
                 <div class="card">
-                    <h3>📋 Invoice Configuration</h3>
-                    <div class="grid-2" style="margin-top: 15px;">
+                    <h3><i class="fa-solid fa-gear"></i> Configuration</h3>
+                    <div class="grid-2">
                         <div class="form-group">
-                            <label>Invoice Number</label>
+                            <label>Invoice No.</label>
                             <input type="text" id="inv-number" value="BKV-1001">
                         </div>
                         <div class="form-group">
@@ -392,19 +421,17 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label>Client Reference Name</label>
+                        <label>Client Name</label>
                         <input type="text" id="inv-client" placeholder="Ex: Nilanka Perera">
                     </div>
                     
-                    <h3 class="quick-items-title" style="margin-top: 20px; font-size: 15px;">⚡ Quick Item Injector</h3>
-                    <div class="quick-items-container" id="inv-quick-items">
-                        <!-- Dynamic items loaded here -->
-                    </div>
+                    <h3 class="quick-items-title" style="margin-top: 20px;"><i class="fa-solid fa-bolt"></i> Quick Item Injector</h3>
+                    <div class="quick-items-container" id="inv-quick-items"></div>
                 </div>
 
                 <div class="card">
-                    <h3>✨ Item Insertion</h3>
-                    <div class="form-group" style="margin-top: 15px;">
+                    <h3><i class="fa-solid fa-cart-plus"></i> Item Insertion</h3>
+                    <div class="form-group">
                         <label>Item Description</label>
                         <input type="text" id="inv-item-name" placeholder="Ex: Premium Logo Design">
                     </div>
@@ -418,7 +445,7 @@
                             <input type="number" id="inv-item-qty" value="1">
                         </div>
                     </div>
-                    <button class="btn btn-secondary" onclick="addItemToInvoice()">➕ Append Item</button>
+                    <button class="btn btn-secondary" onclick="addItemToInvoice()"><i class="fa-solid fa-plus"></i> Append Item</button>
 
                     <div class="form-group" style="margin-top: 25px;">
                         <label>Apply Overall Discount (Rs.)</label>
@@ -428,38 +455,40 @@
             </div>
 
             <div class="card">
-                <h3>🛒 Invoice Rows</h3>
-                <table id="invoice-items-table">
-                    <thead>
-                        <tr>
-                            <th>Description</th>
-                            <th>Rate</th>
-                            <th>Qty</th>
-                            <th>Total</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody></tbody>
-                </table>
-                <div style="text-align: right; margin-top: 20px; font-size: 16px; font-weight: bold;">
-                    <span style="color: var(--text-muted);">Gross Calculation:</span> <span id="inv-gross-val">Rs. 0.00</span><br>
-                    <span style="color: var(--gold);">Final Payable Total:</span> <span id="inv-net-val" style="font-size: 20px; color: var(--success);">Rs. 0.00</span>
+                <h3><i class="fa-solid fa-list"></i> Invoice Rows</h3>
+                <div class="table-responsive">
+                    <table id="invoice-items-table">
+                        <thead>
+                            <tr>
+                                <th>Description</th>
+                                <th>Rate</th>
+                                <th>Qty</th>
+                                <th>Total</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
                 </div>
-                <div style="margin-top: 20px;">
-                    <button class="btn btn-success" onclick="generateDocumentPDF('invoice')">💎 Issue & Download PDF</button>
+                <div style="text-align: right; margin-top: 20px; font-size: 15px; font-weight: bold;">
+                    <span style="color: var(--text-muted);">Gross Calculation:</span> <span id="inv-gross-val">Rs. 0.00</span><br>
+                    <span style="color: var(--gold);">Final Payable Total:</span> <span id="inv-net-val" style="font-size: 18px; color: var(--success);">Rs. 0.00</span>
+                </div>
+                <div style="margin-top: 20px; text-align: right;">
+                    <button class="btn btn-success" onclick="generateDocumentPDF('invoice')"><i class="fa-solid fa-download"></i> Issue & Download PDF</button>
                 </div>
             </div>
         </div>
 
         <!-- QUOTATION TAB -->
         <div id="quotation-tab" class="tab-content">
-            <h2>✨ Premium Quotation Creator</h2>
+            <h2><i class="fa-solid fa-file-contract"></i> Premium Quotation Creator</h2>
             <div class="grid-2">
                 <div class="card">
-                    <h3>📋 Quotation Configuration</h3>
-                    <div class="grid-2" style="margin-top: 15px;">
+                    <h3><i class="fa-solid fa-gear"></i> Configuration</h3>
+                    <div class="grid-2">
                         <div class="form-group">
-                            <label>Quotation Number</label>
+                            <label>Quotation No.</label>
                             <input type="text" id="qot-number" value="BKV-Q001">
                         </div>
                         <div class="form-group">
@@ -468,19 +497,17 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label>Client Reference Name</label>
+                        <label>Client Name</label>
                         <input type="text" id="qot-client" placeholder="Ex: Nilanka Perera">
                     </div>
                     
-                    <h3 class="quick-items-title" style="margin-top: 20px; font-size: 15px;">⚡ Quick Item Injector</h3>
-                    <div class="quick-items-container" id="qot-quick-items">
-                        <!-- Dynamic items loaded here -->
-                    </div>
+                    <h3 class="quick-items-title" style="margin-top: 20px;"><i class="fa-solid fa-bolt"></i> Quick Item Injector</h3>
+                    <div class="quick-items-container" id="qot-quick-items"></div>
                 </div>
 
                 <div class="card">
-                    <h3>✨ Item Insertion</h3>
-                    <div class="form-group" style="margin-top: 15px;">
+                    <h3><i class="fa-solid fa-cart-plus"></i> Item Insertion</h3>
+                    <div class="form-group">
                         <label>Item Description</label>
                         <input type="text" id="qot-item-name" placeholder="Ex: Social Media Poster Kit">
                     </div>
@@ -494,7 +521,7 @@
                             <input type="number" id="qot-item-qty" value="1">
                         </div>
                     </div>
-                    <button class="btn btn-secondary" onclick="addItemToQuotation()">➕ Append Item</button>
+                    <button class="btn btn-secondary" onclick="addItemToQuotation()"><i class="fa-solid fa-plus"></i> Append Item</button>
 
                     <div class="form-group" style="margin-top: 25px;">
                         <label>Apply Overall Discount (Rs.)</label>
@@ -504,37 +531,39 @@
             </div>
 
             <div class="card">
-                <h3>🛒 Quotation Rows</h3>
-                <table id="quotation-items-table">
-                    <thead>
-                        <tr>
-                            <th>Description</th>
-                            <th>Rate</th>
-                            <th>Qty</th>
-                            <th>Total</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody></tbody>
-                </table>
-                <div style="text-align: right; margin-top: 20px; font-size: 16px; font-weight: bold;">
-                    <span style="color: var(--text-muted);">Estimated Gross:</span> <span id="qot-gross-val">Rs. 0.00</span><br>
-                    <span style="color: var(--gold);">Estimated Net Total:</span> <span id="qot-net-val" style="font-size: 20px; color: var(--accent);">Rs. 0.00</span>
+                <h3><i class="fa-solid fa-list"></i> Quotation Rows</h3>
+                <div class="table-responsive">
+                    <table id="quotation-items-table">
+                        <thead>
+                            <tr>
+                                <th>Description</th>
+                                <th>Rate</th>
+                                <th>Qty</th>
+                                <th>Total</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
                 </div>
-                <div style="margin-top: 20px;">
-                    <button class="btn btn-success" onclick="generateDocumentPDF('quotation')">💎 Download Quote PDF</button>
+                <div style="text-align: right; margin-top: 20px; font-size: 15px; font-weight: bold;">
+                    <span style="color: var(--text-muted);">Estimated Gross:</span> <span id="qot-gross-val">Rs. 0.00</span><br>
+                    <span style="color: var(--gold);">Estimated Net Total:</span> <span id="qot-net-val" style="font-size: 18px; color: var(--accent);">Rs. 0.00</span>
+                </div>
+                <div style="margin-top: 20px; text-align: right;">
+                    <button class="btn btn-success" onclick="generateDocumentPDF('quotation')"><i class="fa-solid fa-download"></i> Download Quote PDF</button>
                 </div>
             </div>
         </div>
 
         <!-- PRICE LIST TAB -->
         <div id="pricelist-tab" class="tab-content">
-            <h2>💼 Master Service Price Directory</h2>
+            <h2><i class="fa-solid fa-tags"></i> Master Service Catalog</h2>
             <div class="grid-2">
                 <div class="card">
-                    <h3>✨ Catalog New Item</h3>
+                    <h3><i class="fa-solid fa-folder-plus"></i> Catalog New Item</h3>
                     <input type="hidden" id="edit-item-id">
-                    <div class="form-group" style="margin-top: 15px;">
+                    <div class="form-group">
                         <label>Service / Item Title</label>
                         <input type="text" id="catalog-name" placeholder="Ex: Business Logo Branding">
                     </div>
@@ -542,64 +571,70 @@
                         <label>Standard Price (Rs.)</label>
                         <input type="number" id="catalog-price" placeholder="4500">
                     </div>
-                    <button class="btn" id="btn-save-catalog" onclick="saveCatalogItem()">💼 Save Item</button>
-                    <button class="btn btn-secondary" id="btn-cancel-edit" style="display:none;" onclick="clearCatalogForm()">Cancel</button>
+                    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                        <button class="btn" id="btn-save-catalog" onclick="saveCatalogItem()"><i class="fa-solid fa-floppy-disk"></i> Save Item</button>
+                        <button class="btn btn-secondary" id="btn-cancel-edit" style="display:none;" onclick="clearCatalogForm()"><i class="fa-solid fa-xmark"></i> Cancel</button>
+                    </div>
                 </div>
                 <div class="card">
-                    <h3>📋 Catalog Action Panel</h3>
-                    <p style="font-size: 14px; color: var(--text-muted); margin: 15px 0;">All saved service rates remain locked below safely and update the invoice click-boxes instantly.</p>
-                    <button class="btn btn-secondary" onclick="downloadPriceListPDF()">💎 Export Catalog PDF</button>
+                    <h3><i class="fa-solid fa-sliders"></i> Catalog Action Panel</h3>
+                    <p style="font-size: 13px; color: var(--text-muted); margin: 10px 0 20px;">All saved service rates remain locked safely and update the invoice click-boxes instantly.</p>
+                    <button class="btn btn-secondary" onclick="downloadPriceListPDF()"><i class="fa-solid fa-file-pdf"></i> Export Catalog PDF</button>
                 </div>
             </div>
 
             <div class="card">
-                <h3>📁 Active Catalog Records</h3>
-                <table id="catalog-table">
-                    <thead>
-                        <tr>
-                            <th>Service Title</th>
-                            <th>Standard Price</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody></tbody>
-                </table>
+                <h3><i class="fa-solid fa-folder-open"></i> Active Catalog Records</h3>
+                <div class="table-responsive">
+                    <table id="catalog-table">
+                        <thead>
+                            <tr>
+                                <th>Service Title</th>
+                                <th>Standard Price</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
             </div>
         </div>
 
         <!-- HISTORY TAB -->
         <div id="history-tab" class="tab-content">
-            <h2>📅 Saved Transaction Logs</h2>
+            <h2><i class="fa-solid fa-clock-rotate-left"></i> Saved Transaction Logs</h2>
             <div class="card">
-                <h3>🧾 Dispatched Documents Ledger</h3>
-                <table id="history-table-element">
-                    <thead>
-                        <tr>
-                            <th>Document</th>
-                            <th>Client</th>
-                            <th>Date</th>
-                            <th>Net Value</th>
-                            <th>Payment Clear Status</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody></tbody>
-                </table>
+                <h3><i class="fa-solid fa-book"></i> Dispatched Documents Ledger</h3>
+                <div class="table-responsive">
+                    <table id="history-table-element">
+                        <thead>
+                            <tr>
+                                <th>Document</th>
+                                <th>Client</th>
+                                <th>Date</th>
+                                <th>Net Value</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
             </div>
         </div>
 
         <!-- EXPENSES TAB -->
         <div id="expenses-tab" class="tab-content">
-            <h2>💸 Business Expenditures Logging</h2>
+            <h2><i class="fa-solid fa-wallet"></i> Business Expenditures</h2>
             <div class="card">
-                <h3>📉 Log Operation Cost</h3>
-                <div class="grid-3" style="margin-top: 15px;">
+                <h3><i class="fa-solid fa-money-bill-trend-up"></i> Log Operation Cost</h3>
+                <div class="grid-3">
                     <div class="form-group">
-                        <label>Expenditure Description</label>
+                        <label>Expenditure Details</label>
                         <input type="text" id="exp-name" placeholder="Ex: Internet Data Package">
                     </div>
                     <div class="form-group">
-                        <label>Cost Amount (Rs.)</label>
+                        <label>Amount (Rs.)</label>
                         <input type="number" id="exp-amount" placeholder="1500">
                     </div>
                     <div class="form-group">
@@ -607,28 +642,30 @@
                         <input type="date" id="exp-date">
                     </div>
                 </div>
-                <button class="btn btn-danger" onclick="addExpenseItem()">📉 Register Loss</button>
+                <button class="btn btn-danger" onclick="addExpenseItem()"><i class="fa-solid fa-arrow-down"></i> Register Expense</button>
             </div>
 
             <div class="card">
-                <h3>📁 Expenses Records Ledger</h3>
-                <table id="expenses-table-element">
-                    <thead>
-                        <tr>
-                            <th>Description</th>
-                            <th>Date</th>
-                            <th>Amount</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody></tbody>
-                </table>
+                <h3><i class="fa-solid fa-list-check"></i> Expenses Records</h3>
+                <div class="table-responsive">
+                    <table id="expenses-table-element">
+                        <thead>
+                            <tr>
+                                <th>Description</th>
+                                <th>Date</th>
+                                <th>Amount</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
             </div>
         </div>
 
     </div>
 
-    <!-- NATIVE PRINT PREVIEW CONTAINER (ONLY INJECTED VIA MEDIA PRINT) -->
+    <!-- NATIVE PRINT PREVIEW CONTAINER -->
     <div id="print-preview-container"></div>
 
     <script>
@@ -642,11 +679,9 @@
         let db_history = JSON.parse(localStorage.getItem('bkv_history')) || [];
         let db_expenses = JSON.parse(localStorage.getItem('bkv_expenses')) || [];
 
-        // Active State Memory
         let active_invoice_items = [];
         let active_quotation_items = [];
 
-        // Set Current System Dates
         window.onload = function() {
             const today = new Date().toISOString().split('T')[0];
             document.getElementById('inv-date').value = today;
@@ -670,49 +705,37 @@
             calculateDashboard();
         }
 
-        // Navigation Controllers
         function switchTab(tabId) {
             document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
             document.querySelectorAll('.nav-btn').forEach(el => el.classList.remove('active'));
-            
             document.getElementById(tabId).classList.add('active');
             event.currentTarget.classList.add('active');
-            
             if (tabId === 'dashboard') calculateDashboard();
         }
 
-        // Price List System Functions
+        // --- Core Functions (Items, Save, Delete) ---
         function renderPriceList() {
             const tbody = document.querySelector('#catalog-table tbody');
             const invQuick = document.getElementById('inv-quick-items');
             const qotQuick = document.getElementById('qot-quick-items');
             
-            tbody.innerHTML = '';
-            invQuick.innerHTML = '';
-            qotQuick.innerHTML = '';
+            tbody.innerHTML = ''; invQuick.innerHTML = ''; qotQuick.innerHTML = '';
 
             db_price_list.forEach(item => {
-                // Table Rendering
-                tbody.innerHTML += `
-                    <tr>
-                        <td style="font-weight: 600;">${item.name}</td>
-                        <td style="color: var(--gold); font-weight: 600;">Rs. ${parseFloat(item.price).toFixed(2)}</td>
-                        <td>
-                            <button class="btn btn-secondary" style="padding:6px 12px; font-size:12px;" onclick="loadEditCatalogItem(${item.id})">✏️ Edit</button>
-                            <button class="btn btn-danger" style="padding:6px 12px; font-size:12px;" onclick="deleteCatalogItem(${item.id})">🗑️ Delete</button>
-                        </td>
-                    </tr>
-                `;
+                tbody.innerHTML += `<tr>
+                    <td style="font-weight: 600;">${item.name}</td>
+                    <td style="color: var(--gold); font-weight: 600;">Rs. ${parseFloat(item.price).toFixed(2)}</td>
+                    <td>
+                        <button class="btn btn-secondary" style="padding:6px 10px; font-size:12px; min-width:auto;" onclick="loadEditCatalogItem(${item.id})"><i class="fa-solid fa-pen"></i></button>
+                        <button class="btn btn-danger" style="padding:6px 10px; font-size:12px; min-width:auto;" onclick="deleteCatalogItem(${item.id})"><i class="fa-solid fa-trash"></i></button>
+                    </td>
+                </tr>`;
 
-                // Quick Blocks UI Grid Builder
-                const blockHTML = `
-                    <div class="quick-item-box" onclick="injectQuickItem('${escape(item.name)}', ${item.price})">
-                        <span class="quick-item-name">${item.name}</span>
-                        <span class="quick-item-price">Rs. ${item.price}</span>
-                    </div>
-                `;
-                invQuick.innerHTML += blockHTML;
-                qotQuick.innerHTML += blockHTML;
+                const blockHTML = `<div class="quick-item-box" onclick="injectQuickItem('${escape(item.name)}', ${item.price})">
+                    <span class="quick-item-name">${item.name}</span>
+                    <span class="quick-item-price">Rs. ${item.price}</span>
+                </div>`;
+                invQuick.innerHTML += blockHTML; qotQuick.innerHTML += blockHTML;
             });
         }
 
@@ -724,21 +747,13 @@
             if (!name || isNaN(price)) return alert('Please enter valid data inputs.');
 
             if (idField) {
-                // Edit existing record
                 const target = db_price_list.find(x => x.id == idField);
-                if (target) {
-                    target.name = name;
-                    target.price = price;
-                }
+                if (target) { target.name = name; target.price = price; }
             } else {
-                // Generate secure item row id
                 const newId = db_price_list.length ? Math.max(...db_price_list.map(o => o.id)) + 1 : 1;
                 db_price_list.push({ id: newId, name, price });
             }
-
-            saveToStorage();
-            clearCatalogForm();
-            renderPriceList();
+            saveToStorage(); clearCatalogForm(); renderPriceList();
         }
 
         function loadEditCatalogItem(id) {
@@ -747,209 +762,142 @@
             document.getElementById('edit-item-id').value = target.id;
             document.getElementById('catalog-name').value = target.name;
             document.getElementById('catalog-price').value = target.price;
-            document.getElementById('btn-save-catalog').innerText = '✏️ Update Item';
+            document.getElementById('btn-save-catalog').innerHTML = '<i class="fa-solid fa-pen"></i> Update Item';
             document.getElementById('btn-cancel-edit').style.display = 'inline-flex';
         }
 
         function clearCatalogForm() {
-            document.getElementById('edit-item-id').value = '';
-            document.getElementById('catalog-name').value = '';
-            document.getElementById('catalog-price').value = '';
-            document.getElementById('btn-save-catalog').innerText = '💼 Save Item';
+            document.getElementById('edit-item-id').value = ''; document.getElementById('catalog-name').value = ''; document.getElementById('catalog-price').value = '';
+            document.getElementById('btn-save-catalog').innerHTML = '<i class="fa-solid fa-floppy-disk"></i> Save Item';
             document.getElementById('btn-cancel-edit').style.display = 'none';
         }
 
         function deleteCatalogItem(id) {
             if (confirm('Delete this item from price directory?')) {
                 db_price_list = db_price_list.filter(x => x.id != id);
-                saveToStorage();
-                renderPriceList();
+                saveToStorage(); renderPriceList();
             }
         }
 
         function injectQuickItem(name, price) {
             const currentTab = document.querySelector('.tab-content.active').id;
             if (currentTab === 'invoice-tab') {
-                document.getElementById('inv-item-name').value = unescape(name);
-                document.getElementById('inv-item-price').value = price;
+                document.getElementById('inv-item-name').value = unescape(name); document.getElementById('inv-item-price').value = price;
             } else if (currentTab === 'quotation-tab') {
-                document.getElementById('qot-item-name').value = unescape(name);
-                document.getElementById('qot-item-price').value = price;
+                document.getElementById('qot-item-name').value = unescape(name); document.getElementById('qot-item-price').value = price;
             }
         }
 
-        // Invoice Engine logic
         function addItemToInvoice() {
             const name = document.getElementById('inv-item-name').value;
             const price = parseFloat(document.getElementById('inv-item-price').value);
             const qty = parseInt(document.getElementById('inv-item-qty').value);
-
             if (!name || isNaN(price) || isNaN(qty)) return alert('Complete item specs correctly.');
-
             active_invoice_items.push({ name, price, qty, total: price * qty });
             renderInvoiceTable();
-            
-            document.getElementById('inv-item-name').value = '';
-            document.getElementById('inv-item-price').value = '';
-            document.getElementById('inv-item-qty').value = '1';
+            document.getElementById('inv-item-name').value = ''; document.getElementById('inv-item-price').value = ''; document.getElementById('inv-item-qty').value = '1';
         }
 
         function renderInvoiceTable() {
-            const tbody = document.querySelector('#invoice-items-table tbody');
-            tbody.innerHTML = '';
+            const tbody = document.querySelector('#invoice-items-table tbody'); tbody.innerHTML = '';
             active_invoice_items.forEach((item, idx) => {
-                tbody.innerHTML += `
-                    <tr>
-                        <td>${item.name}</td>
-                        <td>Rs. ${item.price.toFixed(2)}</td>
-                        <td>${item.qty}</td>
-                        <td>Rs. ${item.total.toFixed(2)}</td>
-                        <td><button class="btn btn-danger" style="padding:4px 8px; font-size:11px;" onclick="removeInvoiceItem(${idx})">🗑️</button></td>
-                    </tr>
-                `;
+                tbody.innerHTML += `<tr>
+                    <td>${item.name}</td><td>Rs. ${item.price.toFixed(2)}</td><td>${item.qty}</td><td>Rs. ${item.total.toFixed(2)}</td>
+                    <td><button class="btn btn-danger" style="padding:6px 10px; font-size:12px; min-width:auto;" onclick="removeInvoiceItem(${idx})"><i class="fa-solid fa-xmark"></i></button></td>
+                </tr>`;
             });
             calculateInvoiceTotals();
         }
 
-        function removeInvoiceItem(idx) {
-            active_invoice_items.splice(idx, 1);
-            renderInvoiceTable();
-        }
+        function removeInvoiceItem(idx) { active_invoice_items.splice(idx, 1); renderInvoiceTable(); }
 
         function calculateInvoiceTotals() {
             let gross = active_invoice_items.reduce((acc, obj) => acc + obj.total, 0);
             let discount = parseFloat(document.getElementById('inv-discount').value) || 0;
             let net = Math.max(0, gross - discount);
-
             document.getElementById('inv-gross-val').innerText = 'Rs. ' + gross.toFixed(2);
             document.getElementById('inv-net-val').innerText = 'Rs. ' + net.toFixed(2);
         }
 
-        // Quotation Engine logic
         function addItemToQuotation() {
             const name = document.getElementById('qot-item-name').value;
             const price = parseFloat(document.getElementById('qot-item-price').value);
             const qty = parseInt(document.getElementById('qot-item-qty').value);
-
             if (!name || isNaN(price) || isNaN(qty)) return alert('Complete item specs correctly.');
-
             active_quotation_items.push({ name, price, qty, total: price * qty });
             renderQuotationTable();
-
-            document.getElementById('qot-item-name').value = '';
-            document.getElementById('qot-item-price').value = '';
-            document.getElementById('qot-item-qty').value = '1';
+            document.getElementById('qot-item-name').value = ''; document.getElementById('qot-item-price').value = ''; document.getElementById('qot-item-qty').value = '1';
         }
 
         function renderQuotationTable() {
-            const tbody = document.querySelector('#quotation-items-table tbody');
-            tbody.innerHTML = '';
+            const tbody = document.querySelector('#quotation-items-table tbody'); tbody.innerHTML = '';
             active_quotation_items.forEach((item, idx) => {
-                tbody.innerHTML += `
-                    <tr>
-                        <td>${item.name}</td>
-                        <td>Rs. ${item.price.toFixed(2)}</td>
-                        <td>${item.qty}</td>
-                        <td>Rs. ${item.total.toFixed(2)}</td>
-                        <td><button class="btn btn-danger" style="padding:4px 8px; font-size:11px;" onclick="removeQuotationItem(${idx})">🗑️</button></td>
-                    </tr>
-                `;
+                tbody.innerHTML += `<tr>
+                    <td>${item.name}</td><td>Rs. ${item.price.toFixed(2)}</td><td>${item.qty}</td><td>Rs. ${item.total.toFixed(2)}</td>
+                    <td><button class="btn btn-danger" style="padding:6px 10px; font-size:12px; min-width:auto;" onclick="removeQuotationItem(${idx})"><i class="fa-solid fa-xmark"></i></button></td>
+                </tr>`;
             });
             calculateQuotationTotals();
         }
 
-        function removeQuotationItem(idx) {
-            active_quotation_items.splice(idx, 1);
-            renderQuotationTable();
-        }
+        function removeQuotationItem(idx) { active_quotation_items.splice(idx, 1); renderQuotationTable(); }
 
         function calculateQuotationTotals() {
             let gross = active_quotation_items.reduce((acc, obj) => acc + obj.total, 0);
             let discount = parseFloat(document.getElementById('qot-discount').value) || 0;
             let net = Math.max(0, gross - discount);
-
             document.getElementById('qot-gross-val').innerText = 'Rs. ' + gross.toFixed(2);
             document.getElementById('qot-net-val').innerText = 'Rs. ' + net.toFixed(2);
         }
 
-        // Expenses Operations
         function addExpenseItem() {
             const name = document.getElementById('exp-name').value;
             const amount = parseFloat(document.getElementById('exp-amount').value);
             const date = document.getElementById('exp-date').value;
-
             if (!name || isNaN(amount) || !date) return alert('Enter full valid expense log.');
-
             db_expenses.push({ id: Date.now(), name, amount, date });
-            saveToStorage();
-            renderExpenses();
-            
-            document.getElementById('exp-name').value = '';
-            document.getElementById('exp-amount').value = '';
+            saveToStorage(); renderExpenses();
+            document.getElementById('exp-name').value = ''; document.getElementById('exp-amount').value = '';
         }
 
         function renderExpenses() {
-            const tbody = document.querySelector('#expenses-table-element tbody');
-            tbody.innerHTML = '';
+            const tbody = document.querySelector('#expenses-table-element tbody'); tbody.innerHTML = '';
             db_expenses.forEach(item => {
-                tbody.innerHTML += `
-                    <tr>
-                        <td>${item.name}</td>
-                        <td>${item.date}</td>
-                        <td style="color:var(--danger);">Rs. ${item.amount.toFixed(2)}</td>
-                        <td><button class="btn btn-danger" style="padding:4px 8px; font-size:12px;" onclick="deleteExpense(${item.id})">🗑️</button></td>
-                    </tr>
-                `;
+                tbody.innerHTML += `<tr>
+                    <td>${item.name}</td><td>${item.date}</td><td style="color:var(--danger);">Rs. ${item.amount.toFixed(2)}</td>
+                    <td><button class="btn btn-danger" style="padding:6px 10px; font-size:12px; min-width:auto;" onclick="deleteExpense(${item.id})"><i class="fa-solid fa-trash"></i></button></td>
+                </tr>`;
             });
         }
 
-        function deleteExpense(id) {
-            db_expenses = db_expenses.filter(x => x.id !== id);
-            saveToStorage();
-            renderExpenses();
-        }
+        function deleteExpense(id) { db_expenses = db_expenses.filter(x => x.id !== id); saveToStorage(); renderExpenses(); calculateDashboard(); }
 
-        // Ledger Records System Engine
         function renderHistory() {
-            const tbody = document.querySelector('#history-table-element tbody');
-            tbody.innerHTML = '';
+            const tbody = document.querySelector('#history-table-element tbody'); tbody.innerHTML = '';
             db_history.forEach(item => {
-                tbody.innerHTML += `
-                    <tr>
-                        <td style="font-weight:600; text-transform:uppercase;">📊 ${item.type}: ${item.number}</td>
-                        <td>${item.client}</td>
-                        <td>${item.date}</td>
-                        <td style="color:var(--success); font-weight:700;">Rs. ${item.total.toFixed(2)}</td>
-                        <td>
-                            <input type="checkbox" class="status-checkbox" ${item.paid ? 'checked' : ''} onchange="togglePaymentStatus(${item.id}, this.checked)">
-                            <label style="display:inline; text-transform:none; font-size:13px;">${item.paid ? '🟢 Paid' : '🔴 Unpaid'}</label>
-                        </td>
-                        <td>
-                            <button class="btn btn-secondary" style="padding:4px 8px; font-size:12px;" onclick="deleteHistoryItem(${item.id})">🗑️</button>
-                        </td>
-                    </tr>
-                `;
+                tbody.innerHTML += `<tr>
+                    <td style="font-weight:600; text-transform:uppercase;"><i class="fa-solid fa-file-lines" style="color:var(--text-muted);"></i> ${item.type}: ${item.number}</td>
+                    <td>${item.client}</td><td>${item.date}</td><td style="color:var(--success); font-weight:700;">Rs. ${item.total.toFixed(2)}</td>
+                    <td>
+                        <div style="display:flex; align-items:center; gap:5px;">
+                            <input type="checkbox" style="width:auto; cursor:pointer;" ${item.paid ? 'checked' : ''} onchange="togglePaymentStatus(${item.id}, this.checked)">
+                            <label style="margin:0; text-transform:none; font-size:12px;">${item.paid ? '<span style="color:var(--success)"><i class="fa-solid fa-check"></i> Paid</span>' : '<span style="color:var(--danger)"><i class="fa-solid fa-xmark"></i> Unpaid</span>'}</label>
+                        </div>
+                    </td>
+                    <td><button class="btn btn-danger" style="padding:6px 10px; font-size:12px; min-width:auto;" onclick="deleteHistoryItem(${item.id})"><i class="fa-solid fa-trash"></i></button></td>
+                </tr>`;
             });
         }
 
         function togglePaymentStatus(id, value) {
             const rec = db_history.find(x => x.id === id);
-            if (rec) {
-                rec.paid = value;
-                saveToStorage();
-                renderHistory();
-            }
+            if (rec) { rec.paid = value; saveToStorage(); renderHistory(); calculateDashboard(); }
         }
 
         function deleteHistoryItem(id) {
-            if (confirm('Delete this transactional record completely?')) {
-                db_history = db_history.filter(x => x.id !== id);
-                saveToStorage();
-                renderHistory();
-            }
+            if (confirm('Delete this transactional record completely?')) { db_history = db_history.filter(x => x.id !== id); saveToStorage(); renderHistory(); calculateDashboard(); }
         }
 
-        // Analytics Engine Calculators
         function calculateDashboard() {
             let totalIncome = db_history.filter(x => x.paid).reduce((acc, o) => acc + o.total, 0);
             let totalExpense = db_expenses.reduce((acc, o) => acc + o.amount, 0);
@@ -964,106 +912,127 @@
                 document.getElementById('bar-income-perc').style.width = ((totalIncome / sum) * 100) + '%';
                 document.getElementById('bar-expense-perc').style.width = ((totalExpense / sum) * 100) + '%';
             } else {
-                document.getElementById('bar-income-perc').style.width = '0%';
-                document.getElementById('bar-expense-perc').style.width = '0%';
+                document.getElementById('bar-income-perc').style.width = '0%'; document.getElementById('bar-expense-perc').style.width = '0%';
             }
         }
 
-        // Premium Print Layout Generators (Transforms on native client UI window print trigger)
+        // ==========================================
+        // NEW UPDATED PREMIUM PRINT PDF GENERATORS 
+        // ==========================================
+        
+        const BRAND_BLUE = '#0f52ba'; // Vibrant Royal Blue from logo
+        const BRAND_DARK = '#060b19'; // Deep Navy from logo
+
         function generateDocumentPDF(type) {
             let number, date, client, items, discount, totalGross, totalNet;
 
             if (type === 'invoice') {
-                number = document.getElementById('inv-number').value;
-                date = document.getElementById('inv-date').value;
-                client = document.getElementById('inv-client').value || 'Valued Client';
-                items = active_invoice_items;
-                discount = parseFloat(document.getElementById('inv-discount').value) || 0;
-                if (!items.length) return alert('Cannot execute generation on empty items.');
+                number = document.getElementById('inv-number').value; date = document.getElementById('inv-date').value;
+                client = document.getElementById('inv-client').value || 'Valued Customer';
+                items = active_invoice_items; discount = parseFloat(document.getElementById('inv-discount').value) || 0;
                 
-                totalGross = items.reduce((acc, o) => acc + o.total, 0);
-                totalNet = Math.max(0, totalGross - discount);
+                if (!items.length) return alert('Cannot execute generation on empty items.');
+                totalGross = items.reduce((acc, o) => acc + o.total, 0); totalNet = Math.max(0, totalGross - discount);
 
-                // Archive inside permanent local dashboard tracking system
                 if(!db_history.some(x => x.number === number && x.type === 'invoice')) {
                     db_history.push({ id: Date.now(), type: 'invoice', number, client, date, total: totalNet, paid: false });
-                    saveToStorage();
-                    renderHistory();
+                    saveToStorage(); renderHistory();
                 }
             } else {
-                number = document.getElementById('qot-number').value;
-                date = document.getElementById('qot-date').value;
-                client = document.getElementById('qot-client').value || 'Valued Client';
-                items = active_quotation_items;
-                discount = parseFloat(document.getElementById('qot-discount').value) || 0;
+                number = document.getElementById('qot-number').value; date = document.getElementById('qot-date').value;
+                client = document.getElementById('qot-client').value || 'Valued Customer';
+                items = active_quotation_items; discount = parseFloat(document.getElementById('qot-discount').value) || 0;
+                
                 if (!items.length) return alert('Cannot execute generation on empty items.');
-
-                totalGross = items.reduce((acc, o) => acc + o.total, 0);
-                totalNet = Math.max(0, totalGross - discount);
+                totalGross = items.reduce((acc, o) => acc + o.total, 0); totalNet = Math.max(0, totalGross - discount);
             }
 
             let rowsHtml = '';
             items.forEach(item => {
                 rowsHtml += `
                     <tr>
-                        <td style="padding: 10px; border-bottom: 1px solid #e2e8f0;">${item.name}</td>
-                        <td style="padding: 10px; border-bottom: 1px solid #e2e8f0; text-align: right;">Rs. ${item.price.toFixed(2)}</td>
-                        <td style="padding: 10px; border-bottom: 1px solid #e2e8f0; text-align: center;">${item.qty}</td>
-                        <td style="padding: 10px; border-bottom: 1px solid #e2e8f0; text-align: right;">Rs. ${item.total.toFixed(2)}</td>
+                        <td style="padding: 12px 15px; border-bottom: 1px solid #f1f5f9; color: #334155; font-size: 13px;">${item.name}</td>
+                        <td style="padding: 12px 15px; border-bottom: 1px solid #f1f5f9; text-align: center; color: #334155; font-size: 13px;">${item.qty}</td>
+                        <td style="padding: 12px 15px; border-bottom: 1px solid #f1f5f9; text-align: right; color: #334155; font-size: 13px;">${item.price.toFixed(2)}</td>
+                        <td style="padding: 12px 15px; border-bottom: 1px solid #f1f5f9; text-align: right; font-weight: bold; color: #0f172a; font-size: 13px;">${item.total.toFixed(2)}</td>
                     </tr>
                 `;
             });
 
             const printArea = document.getElementById('print-preview-container');
             printArea.innerHTML = `
-                <div style="font-family: Arial, sans-serif; color: #334155; padding: 20px; line-height: 1.5;">
-                    <div style="text-align: center; margin-bottom: 35px;">
-                        <h1 style="font-size: 36px; font-weight: 900; color: #0f172a; margin: 0; letter-spacing: 1px;">BKV GRAPHICS</h1>
-                        <p style="font-size: 13px; color: #64748b; text-transform: uppercase; margin-top: 5px; letter-spacing: 2px;">Premium Creative Brand Identity & Graphic Solutions</p>
+                <div style="font-family: 'Segoe UI', Arial, sans-serif; color: #333; padding: 0;">
+                    
+                    <!-- Top Header Block -->
+                    <div style="background-color: ${BRAND_DARK}; padding: 35px 30px; border-bottom: 6px solid ${BRAND_BLUE}; color: white;">
+                        <h1 style="margin: 0; font-size: 36px; font-weight: 900; letter-spacing: 1.5px;">
+                            BKV_<span style="color: ${BRAND_BLUE};">GRAPHICS</span>
+                        </h1>
+                        <p style="margin: 6px 0 0 0; font-size: 11px; letter-spacing: 2.5px; color: #94a3b8; text-transform: uppercase;">Premium Brand Identity Studio</p>
+                        <p style="margin: 18px 0 0 0; font-size: 12px; color: #cbd5e1;">Contact: +94 76 739 9959</p>
                     </div>
 
-                    <div style="display: table; width: 100%; margin-bottom: 30px;">
-                        <div style="display: table-cell; width: 50%;">
-                            <h4 style="margin: 0 0 5px 0; color: #1e293b; font-size:14px; text-transform: uppercase;">Issued To:</h4>
-                            <p style="font-size: 16px; font-weight: bold; margin: 0; color: #0f172a;">${client}</p>
-                        </div>
-                        <div style="display: table-cell; width: 50%; text-align: right; vertical-align: top;">
-                            <h2 style="margin: 0 0 8px 0; color: #6366f1; text-transform: uppercase; font-size: 22px; font-weight:800;">${type.toUpperCase()}</h2>
-                            <p style="margin: 2px 0; font-size: 14px;"><b>Doc Number:</b> ${number}</p>
-                            <p style="margin: 2px 0; font-size: 14px;"><b>Date:</b> ${date}</p>
-                        </div>
-                    </div>
-
-                    <table style="width: 100%; border-collapse: collapse; margin-top: 20px;" class="print-table">
-                        <thead>
-                            <tr style="background-color: #f8fafc;">
-                                <th style="padding: 12px; border-bottom: 2px solid #cbd5e1; text-align: left; font-size: 12px;">Description of Creative Services</th>
-                                <th style="padding: 12px; border-bottom: 2px solid #cbd5e1; text-align: right; font-size: 12px;">Rate</th>
-                                <th style="padding: 12px; border-bottom: 2px solid #cbd5e1; text-align: center; font-size: 12px;">Qty</th>
-                                <th style="padding: 12px; border-bottom: 2px solid #cbd5e1; text-align: right; font-size: 12px;">Total</th>
+                    <!-- Main Info Area -->
+                    <div style="padding: 40px 30px 20px 30px;">
+                        <table style="width: 100%; border: none; margin-bottom: 35px;">
+                            <tr>
+                                <td style="vertical-align: top; width: 50%;">
+                                    <h4 style="margin: 0 0 10px 0; font-size: 13px; color: #1e293b; text-transform: uppercase; display: flex; align-items: center;">
+                                        <span style="display: inline-block; width: 4px; height: 14px; background-color: ${BRAND_BLUE}; margin-right: 8px;"></span>
+                                        BILL TO:
+                                    </h4>
+                                    <p style="margin: 0; font-size: 18px; font-weight: bold; color: #0f172a;">${client}</p>
+                                    <p style="margin: 5px 0 0 0; font-size: 12px; color: #64748b;">Phone: -</p>
+                                </td>
+                                <td style="vertical-align: top; text-align: right; width: 50%;">
+                                    <h2 style="margin: 0 0 12px 0; font-size: 42px; font-weight: 900; color: ${BRAND_BLUE}; text-transform: uppercase; letter-spacing: 1px;">${type === 'invoice' ? 'INVOICE' : 'QUOTATION'}</h2>
+                                    <p style="margin: 0 0 6px 0; font-size: 12px; color: #64748b;">${type === 'invoice' ? 'Invoice No:' : 'Quote No:'} <b style="color: #0f172a;">#${number}</b></p>
+                                    <p style="margin: 0; font-size: 12px; color: #64748b;">Date: <b style="color: #0f172a;">${date}</b></p>
+                                </td>
                             </tr>
-                        </thead>
-                        <tbody>
-                            ${rowsHtml}
-                        </tbody>
-                    </table>
+                        </table>
 
-                    <div style="margin-top: 20px; text-align: right; font-size: 14px;">
-                        <p style="margin: 4px 0;">Gross Evaluation Subtotal: <b>Rs. ${totalGross.toFixed(2)}</b></p>
-                        <p style="margin: 4px 0; color: #ef4444;">Promotional Discount Applied: <b>- Rs. ${discount.toFixed(2)}</b></p>
-                        <hr style="border: none; border-top: 1px solid #cbd5e1; margin: 10px 0; display: inline-block; width: 250px;">
-                        <p style="margin: 4px 0; font-size: 18px; color: #10b981;"><b>Net Balance Payable: Rs. ${totalNet.toFixed(2)}</b></p>
+                        <!-- Items Table -->
+                        <table style="width: 100%; border-collapse: collapse; margin-bottom: 30px;">
+                            <thead>
+                                <tr style="background-color: ${BRAND_DARK}; color: white;">
+                                    <th style="padding: 14px 15px; text-align: left; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; width: 50%;">Description</th>
+                                    <th style="padding: 14px 15px; text-align: center; font-size: 11px; text-transform: uppercase; letter-spacing: 1px;">Qty</th>
+                                    <th style="padding: 14px 15px; text-align: right; font-size: 11px; text-transform: uppercase; letter-spacing: 1px;">Unit Price</th>
+                                    <th style="padding: 14px 15px; text-align: right; font-size: 11px; text-transform: uppercase; letter-spacing: 1px;">Total</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                ${rowsHtml}
+                            </tbody>
+                        </table>
+
+                        <!-- Totals Section -->
+                        <table style="width: 100%; border: none;">
+                            <tr>
+                                <td style="width: 60%;"></td>
+                                <td style="width: 40%; text-align: right;">
+                                    ${discount > 0 ? `
+                                        <p style="margin: 5px 0; font-size: 13px; color: #64748b;">Gross Subtotal: <b>Rs. ${totalGross.toFixed(2)}</b></p>
+                                        <p style="margin: 5px 0 10px 0; font-size: 13px; color: #ef4444;">Discount Applied: <b>- Rs. ${discount.toFixed(2)}</b></p>
+                                    ` : ''}
+                                    <div style="border-top: 2px solid ${BRAND_BLUE}; padding-top: 15px; margin-top: 5px;">
+                                        <p style="margin: 0 0 5px 0; font-size: 12px; font-weight: bold; color: #64748b; text-transform: uppercase;">Grand Total</p>
+                                        <p style="margin: 0; font-size: 32px; font-weight: 900; color: ${BRAND_BLUE};">Rs. ${totalNet.toFixed(2)}</p>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
                     </div>
 
-                    <div style="margin-top: 60px; text-align: center; border-top: 1px dashed #cbd5e1; padding-top: 30px;">
-                        <h3 style="font-family: 'Georgia', serif; font-style: italic; font-weight: normal; color: #475569; margin-bottom: 25px;">Thank you for business with us! ✨</h3>
-                        
-                        <div style="font-size: 12px; color: #64748b; margin-top: 15px; display: inline-block; text-align: center;">
-                            <span style="margin: 0 10px;"><b>📱 WhatsApp:</b> 0767399959</span> | 
-                            <span style="margin: 0 10px;"><b>🌐 Facebook:</b> BKV Graphics</span> | 
-                            <span style="margin: 0 10px;"><b>✉️ Email:</b> bkvgraphis@gmail.com</span>
-                        </div>
-                        <p style="font-weight: bold; font-size: 13px; color: #0f172a; margin-top: 15px; letter-spacing: 1px; text-transform: uppercase;">BKV GRAPHICS Solutions</p>
+                    <!-- Footer Area -->
+                    <div style="background-color: #f8fafc; padding: 25px; margin: 30px; text-align: center; border-radius: 6px; border: 1px solid #e2e8f0;">
+                        <p style="margin: 0 0 12px 0; font-size: 14px; font-weight: bold; font-style: italic; color: #334155;">Thank you for choosing BKV_Graphics for your creative needs.</p>
+                        <p style="margin: 0; font-size: 12px; color: #64748b; letter-spacing: 0.5px;">
+                            <span style="display:inline-block; margin: 0 12px;"><i class="fa-brands fa-facebook" style="color: ${BRAND_BLUE}; font-size: 14px; margin-right: 4px;"></i> BKV Graphics</span> | 
+                            <span style="display:inline-block; margin: 0 12px;"><i class="fa-solid fa-envelope" style="color: ${BRAND_BLUE}; font-size: 14px; margin-right: 4px;"></i> bkvgraphis@gmail.com</span> | 
+                            <span style="display:inline-block; margin: 0 12px;"><i class="fa-brands fa-whatsapp" style="color: ${BRAND_BLUE}; font-size: 14px; margin-right: 4px;"></i> 0767399959</span>
+                        </p>
                     </div>
                 </div>
             `;
@@ -1076,39 +1045,43 @@
             db_price_list.forEach(item => {
                 rowsHtml += `
                     <tr>
-                        <td style="padding: 12px; border-bottom: 1px solid #e2e8f0; font-weight: bold;">${item.name}</td>
-                        <td style="padding: 12px; border-bottom: 1px solid #e2e8f0; text-align: right; color: #f59e0b; font-weight: bold;">Rs. ${parseFloat(item.price).toFixed(2)}</td>
+                        <td style="padding: 14px 15px; border-bottom: 1px solid #f1f5f9; font-weight: bold; font-size: 13px; color: #1e293b;">${item.name}</td>
+                        <td style="padding: 14px 15px; border-bottom: 1px solid #f1f5f9; text-align: right; color: ${BRAND_BLUE}; font-weight: bold; font-size: 13px;">Rs. ${parseFloat(item.price).toFixed(2)}</td>
                     </tr>
                 `;
             });
 
             const printArea = document.getElementById('print-preview-container');
             printArea.innerHTML = `
-                <div style="font-family: Arial, sans-serif; color: #334155; padding: 20px; line-height: 1.5;">
-                    <div style="text-align: center; margin-bottom: 40px;">
-                        <h1 style="font-size: 36px; font-weight: 900; color: #0f172a; margin: 0; letter-spacing: 1px;">BKV GRAPHICS</h1>
-                        <p style="font-size: 13px; color: #64748b; text-transform: uppercase; margin-top: 5px; letter-spacing: 2px;">Official Design Catalog & Rate Card</p>
+                <div style="font-family: 'Segoe UI', Arial, sans-serif; color: #333; padding: 0;">
+                    
+                    <div style="background-color: ${BRAND_DARK}; padding: 35px 30px; border-bottom: 6px solid ${BRAND_BLUE}; color: white; text-align: center;">
+                        <h1 style="margin: 0; font-size: 32px; font-weight: 900; letter-spacing: 1.5px;">
+                            BKV_<span style="color: ${BRAND_BLUE};">GRAPHICS</span>
+                        </h1>
+                        <p style="margin: 6px 0 0 0; font-size: 12px; letter-spacing: 2px; color: #cbd5e1; text-transform: uppercase;">Official Master Catalog & Rate Card</p>
                     </div>
 
-                    <table style="width: 80%; margin: 0 auto; border-collapse: collapse;" class="print-table">
-                        <thead>
-                            <tr style="background-color: #f8fafc;">
-                                <th style="padding: 12px; border-bottom: 2px solid #cbd5e1; text-align: left; font-size: 13px;">Creative Service Suite</th>
-                                <th style="padding: 12px; border-bottom: 2px solid #cbd5e1; text-align: right; font-size: 13px;">Standard Base Rate</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            ${rowsHtml}
-                        </tbody>
-                    </table>
+                    <div style="padding: 40px 30px;">
+                        <table style="width: 100%; border-collapse: collapse; margin-bottom: 30px;">
+                            <thead>
+                                <tr style="background-color: ${BRAND_DARK}; color: white;">
+                                    <th style="padding: 14px 15px; text-align: left; font-size: 11px; text-transform: uppercase; letter-spacing: 1px;">Creative Service Suite</th>
+                                    <th style="padding: 14px 15px; text-align: right; font-size: 11px; text-transform: uppercase; letter-spacing: 1px;">Standard Base Rate</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                ${rowsHtml}
+                            </tbody>
+                        </table>
+                    </div>
 
-                    <div style="margin-top: 80px; text-align: center; border-top: 1px dashed #cbd5e1; padding-top: 30px;">
-                        <div style="font-size: 12px; color: #64748b; display: inline-block;">
-                            <span style="margin: 0 10px;"><b>📱 WhatsApp:</b> 0767399959</span> | 
-                            <span style="margin: 0 10px;"><b>🌐 Facebook:</b> BKV Graphics</span> | 
-                            <span style="margin: 0 10px;"><b>✉️ Email:</b> bkvgraphis@gmail.com</span>
-                        </div>
-                        <p style="font-weight: bold; font-size: 13px; color: #0f172a; margin-top: 15px; letter-spacing: 1px; text-transform: uppercase;">BKV GRAPHICS</p>
+                    <div style="background-color: #f8fafc; padding: 25px; margin: 0 30px 30px 30px; text-align: center; border-radius: 6px; border: 1px solid #e2e8f0;">
+                        <p style="margin: 0; font-size: 12px; color: #64748b; letter-spacing: 0.5px;">
+                            <span style="display:inline-block; margin: 0 12px;"><i class="fa-brands fa-facebook" style="color: ${BRAND_BLUE}; font-size: 14px; margin-right: 4px;"></i> BKV Graphics</span> | 
+                            <span style="display:inline-block; margin: 0 12px;"><i class="fa-solid fa-envelope" style="color: ${BRAND_BLUE}; font-size: 14px; margin-right: 4px;"></i> bkvgraphis@gmail.com</span> | 
+                            <span style="display:inline-block; margin: 0 12px;"><i class="fa-brands fa-whatsapp" style="color: ${BRAND_BLUE}; font-size: 14px; margin-right: 4px;"></i> 0767399959</span>
+                        </p>
                     </div>
                 </div>
             `;
